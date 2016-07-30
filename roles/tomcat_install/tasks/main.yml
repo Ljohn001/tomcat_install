@@ -1,6 +1,16 @@
 ---
-- hosts:
-  remote_user: root
+- name: copy jre
+  copy: src=jre-7u80-linux-x64.tar.gz dest=/usr/local/src
 
-  roles:
-  - tomcat_install
+- name: copy tomcat
+  copy: src=apache-tomcat-8.5.4.tar.gz dest=/usr/local/src
+
+- name: copy java env init scripts
+  copy: src=java-env-7u80.sh dest=/usr/local/src
+
+- name: copy tomcat installation scripts
+  copy: src=install_tomcat.sh dest=/usr/local/src
+
+- shell: sh ./install_tomcat.sh
+  args:
+    chdir: /usr/local/src/
