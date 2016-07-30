@@ -6,7 +6,7 @@
 
 # ENV SETTING
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-basedir=`readlink -f $(basename $0)`
+basedir=`readlink -f $(dirname $0)`
 # setting for user customize
 jre_tar=jre-7u80-linux-x64.tar.gz
 jre_folder=jre1.7.0_80
@@ -26,7 +26,7 @@ mv ${basedir}/${jre_folder} $jre_base
 # JRE ENV SETTING
 sys_jrenv=/etc/profile.d/java-env.sh
 /bin/cp ${basedir}/${sys_jrenv_script} $sys_jrenv
-sed -i "s/%JREBASE%/${jre_base}/g" $sys_jrenv
+sed -i "s#%JREBASE%#${jre_base}#g" $sys_jrenv
 source $sys_jrenv
 
 
@@ -37,8 +37,8 @@ tar zxf $tomcat_tar
 mv ${basedir}/${tomcat_folder} $tomcat_base
 # prepare daemon script
 /bin/cp ${tomcat_base}/bin/catalina.sh /etc/init.d/tomcat
-sed -i "2a # chkconfig: 2345 63 37\
-. /etc/init.d/functions\
-JAVA_HOME=${jre_base}\
-CATALINA_HOME=${tomcat_base}" /etc/init.d/tomcat
+sed -i "2a # chkconfig: 2345 63 37" /etc/init.d/tomcat
+sed -i "3a . /etc/init.d/functions" /etc/init.d/tomcat
+sed -i "4a JAVA_HOME=${jre_base}" /etc/init.d/tomcat
+sed -i "5a CATALINA_HOME=${tomcat_base}" /etc/init.d/tomcat
 chmod 755 /etc/init.d/tomcat
