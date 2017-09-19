@@ -1,6 +1,6 @@
-# tomcat_install
+# ansible-tomcat_install-roles
 
-#配置包括Jre和Tomcat环境
+# 配置包括Jre和Tomcat环境
 版本为：
 - apache-tomcat-8.5.4
 - jre-7u80-linux-x64
@@ -61,7 +61,6 @@ vim site.yml
   roles:
     - env
     - tomcat_install
-
 ```
 
 ***运行***
@@ -69,12 +68,12 @@ vim site.yml
 ansible-playbook -i hosts site.yml
 ```
 
-# 单独安装Jre的Java运行环境
+# 单独安装Java的Jre运行环境
 
 ***修改***
 ```bash
 vim roles/tomcat_install/tasks/main.yml
-# 取消最后三行
+# 注释最后三行
 #- shell: sh ./install_tomcat.sh
 #  args:
 #    chdir: /usr/local/src/
