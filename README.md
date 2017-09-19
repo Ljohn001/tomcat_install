@@ -68,7 +68,9 @@ vim site.yml
 ```bash
 ansible-playbook -i hosts site.yml
 ```
-#单独安装Jre的Java运行环境
+
+# 单独安装Jre的Java运行环境
+
 ***修改***
 ```bash
 vim roles/tomcat_install/tasks/main.yml
